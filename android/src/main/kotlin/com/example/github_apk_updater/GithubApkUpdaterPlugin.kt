@@ -6,6 +6,12 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import androidx.core.content.FileProvider
+import java.io.File
+
 class GithubApkUpdaterPlugin: FlutterPlugin, MethodCallHandler {
   private lateinit var context: Context
   private lateinit var activity: Activity
