@@ -3,14 +3,14 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-class ApkDownloader {
+class GitHubApkDownloader {
   final http.Client client;
   final _downloadProgressController = StreamController<int?>.broadcast();
 
   Stream<int?> get downloadProgressStream => _downloadProgressController.stream;
   bool _isDownloading = false;
 
-  ApkDownloader({http.Client? client}) : client = client ?? http.Client();
+  GitHubApkDownloader({http.Client? client}) : client = client ?? http.Client();
 
   Future<void> start(String url, String savePath) async {
     if (_isDownloading) return;
