@@ -1,5 +1,7 @@
 import 'package:github_apk_updater/models/github_asset_info.dart';
 
+export 'package:github_apk_updater/models/github_asset_info.dart';
+
 class GitHubReleaseInfo {
   final String url;
   final String name;
