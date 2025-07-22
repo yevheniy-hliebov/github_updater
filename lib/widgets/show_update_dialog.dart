@@ -6,8 +6,9 @@ import 'package:github_apk_updater/widgets/release_info_dialog.dart';
 void showUpdateDialog(
   BuildContext context, {
   String? currentVersion,
+  String? ignoredVersion,
   required GithubApkUpdater apkUpdater,
-  void Function()? onUpdate,
+  void Function(GitHubReleaseInfo releaseInfo)? onUpdate,
 }) async {
   showDialog(
     context: context,
@@ -21,6 +22,10 @@ void showUpdateDialog(
     Navigator.of(context).pop();
   }
 
+  if (data?.tagName == ignoredVersion) {
+    return;
+  }
+
   if ((data == null || data.tagName == currentVersion) && context.mounted) {
     showDialog(context: context, builder: (_) => NoNewUpdatesFoundDialog());
   }
@@ -32,7 +37,7 @@ void showUpdateDialog(
     );
 
     if (result == ReleaseInfoDialogAnswer.update) {
-      onUpdate?.call();
+      onUpdate?.call(data);
     }
   }
 }
