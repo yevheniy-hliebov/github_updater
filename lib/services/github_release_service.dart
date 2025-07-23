@@ -6,17 +6,18 @@ import 'package:http/http.dart' as http;
 enum AppVersionMode { stable, beta }
 
 class GithubReleaseService {
+  final String apiUrl;
   final String repo;
   final http.Client client;
 
-  GithubReleaseService({required this.repo, http.Client? client})
+  GithubReleaseService({this.apiUrl = 'https://api.github.com', required this.repo, http.Client? client})
     : client = client ?? http.Client();
 
   Future<GitHubReleaseInfo?> fetchLatestRelease({
     AppVersionMode mode = AppVersionMode.stable,
   }) async {
     final response = await client.get(
-      Uri.parse('https://api.github.com/repos/$repo/releases'),
+      Uri.parse('$apiUrl/repos/$repo/releases'),
       headers: {'Accept': 'application/vnd.github.v3+json'},
     );
 
@@ -38,7 +39,7 @@ class GithubReleaseService {
   }
 
   Future<GitHubReleaseInfo?> fetchReleaseByTag(String tag) async {
-    final url = 'https://api.github.com/repos/$repo/releases/tags/$tag';
+    final url = '$apiUrl/repos/$repo/releases/tags/$tag';
     final response = await client.get(
       Uri.parse(url),
       headers: {'Accept': 'application/vnd.github.v3+json'},
