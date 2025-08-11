@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:github_updater/github_apk_updater.dart';
+import 'package:github_updater/github_updater.dart';
 import 'package:github_updater/widgets/no_new_updates_found_dialog.dart';
 import 'package:github_updater/widgets/release_info_dialog.dart';
 
