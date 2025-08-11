@@ -1,7 +1,7 @@
-name: github_apk_updater
+name: github_updater
 description: "A new Flutter plugin project."
 version: 0.0.2
-homepage: "https://github.com/yevheniy-hliebov/github_apk_updater"
+homepage: "https://github.com/yevheniy-hliebov/github_updater"
 
 environment:
   sdk: ^3.8.1

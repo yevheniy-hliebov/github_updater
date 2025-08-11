@@ -3,14 +3,14 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-class GitHubApkDownloader {
+class GitHubDownloader {
   final http.Client client;
   final _downloadProgressController = StreamController<int?>.broadcast();
 
   Stream<int?> get downloadProgressStream => _downloadProgressController.stream;
   bool _isDownloading = false;
 
-  GitHubApkDownloader({http.Client? client}) : client = client ?? http.Client();
+  GitHubDownloader({http.Client? client}) : client = client ?? http.Client();
 
   Future<void> start(String url, String savePath) async {
     if (_isDownloading) return;
@@ -22,7 +22,7 @@ class GitHubApkDownloader {
 
     if (response.statusCode != 200) {
       _isDownloading = false;
-      throw Exception('Failed to download APK');
+      throw Exception('Failed to download');
     }
 
     final contentLength = response.contentLength ?? 0;

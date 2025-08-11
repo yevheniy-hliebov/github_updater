@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
-import 'package:github_apk_updater/github_apk_updater.dart';
+import 'package:github_updater/github_apk_updater.dart';
 
 enum ReleaseInfoDialogAnswer { ignoreVersion, remindMeLater, update }
 

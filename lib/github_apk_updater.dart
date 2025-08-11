@@ -1,26 +1,35 @@
 library;
 
 import 'package:flutter/services.dart';
-import 'package:github_apk_updater/services/github_apk_downloader.dart';
-import 'package:github_apk_updater/services/github_release_service.dart';
+import 'package:github_updater/models/github_release_info.dart';
+import 'package:github_updater/services/github_downloader.dart';
+import 'package:github_updater/services/github_release_service.dart';
 
-export 'package:github_apk_updater/services/github_apk_downloader.dart';
-export 'package:github_apk_updater/services/github_release_service.dart';
-export 'package:github_apk_updater/models/github_release_info.dart';
+export 'package:github_updater/services/github_downloader.dart';
+export 'package:github_updater/services/github_release_service.dart';
+export 'package:github_updater/models/github_release_info.dart';
 
-class GithubApkUpdater {
-  final GitHubApkDownloader _apkDownloader;
+class GithubUpdater {
+  final GitHubDownloader _downloader;
   final GithubReleaseService _releaseService;
 
-  GithubApkUpdater({
+  GithubUpdater({
     required String repo,
-    GitHubApkDownloader? apkDownloader,
+    String apiUrl = 'https://api.github.com',
+    GitHubDownloader? downloader,
     GithubReleaseService? releaseService,
-  }) : _apkDownloader = apkDownloader ?? GitHubApkDownloader(),
-       _releaseService = releaseService ?? GithubReleaseService(repo: repo);
+  }) : _downloader = downloader ?? GitHubDownloader(),
+       _releaseService =
+           releaseService ?? GithubReleaseService(repo: repo, apiUrl: apiUrl);
 
-  GitHubApkDownloader get apkDownloader => _apkDownloader;
-  GithubReleaseService get releaseService => _releaseService;
+  GitHubDownloader get downloader => _downloader;
+
+  Future<GitHubReleaseInfo?> fetchLatestRelease({
+    AppVersionMode mode = AppVersionMode.stable,
+  }) async => _releaseService.fetchLatestRelease(mode: mode);
+
+  Future<GitHubReleaseInfo?> fetchReleaseByTag(String tag) async =>
+      _releaseService.fetchReleaseByTag(tag);
 
   static const MethodChannel _channel = MethodChannel('flutter_app_updater');
 

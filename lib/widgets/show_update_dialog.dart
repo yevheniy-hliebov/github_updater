@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:github_apk_updater/github_apk_updater.dart';
-import 'package:github_apk_updater/widgets/no_new_updates_found_dialog.dart';
-import 'package:github_apk_updater/widgets/release_info_dialog.dart';
+import 'package:github_updater/github_apk_updater.dart';
+import 'package:github_updater/widgets/no_new_updates_found_dialog.dart';
+import 'package:github_updater/widgets/release_info_dialog.dart';
 
 void showUpdateDialog(
   BuildContext context, {
   String? currentVersion,
   String? ignoredVersion,
-  required GithubApkUpdater apkUpdater,
+  required GithubUpdater apkUpdater,
   void Function(GitHubReleaseInfo releaseInfo)? onUpdate,
 }) async {
   showDialog(
@@ -16,7 +16,7 @@ void showUpdateDialog(
     builder: (_) => const Center(child: CircularProgressIndicator()),
   );
 
-  final data = await apkUpdater.releaseService.fetchLatestRelease();
+  final data = await apkUpdater.fetchLatestRelease();
 
   if (context.mounted) {
     Navigator.of(context).pop();

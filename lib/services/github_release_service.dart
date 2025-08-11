@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:github_apk_updater/models/github_release_info.dart';
+import 'package:github_updater/models/github_release_info.dart';
 import 'package:http/http.dart' as http;
 
 enum AppVersionMode { stable, beta }
